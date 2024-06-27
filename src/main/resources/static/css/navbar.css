@@ -1,0 +1,38 @@
+
+.header {
+    background-color: #8080c0;
+    color: #fff;
+    margin: 0; 
+    padding: 10px 20px; 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.menu-buttons {
+    display: flex;
+}
+
+.menu-button {
+    background-color: #ff8000;
+    color: #000000;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.logout-button {
+    background-color: #dc3545;
+    color: #000000;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+}
+

@@ -1,0 +1,34 @@
+@charset "UTF-8";
+
+body {
+    margin: 0;
+    padding: 0;
+    background: url('https://img.freepik.com/free-vector/abstract-secure-technology-background_23-2148331624.jpg') center/cover;
+    font-family: sans-serif;
+}
+
+.error, .msg {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.error {
+    color: #a94442;
+    background-color: #f2dede;
+}
+
+.msg {
+    color: #31708f;
+    background-color: #d9edf7;
+}
+
+#login-box {
+    width: 300px;
+    padding: 20px;
+    margin: 100px auto;
+    background: rgba(255, 255, 255, 0.8); /* Added opacity to make text more readable */
+    border-radius: 2px;
+    border: 1px solid #000;
+}

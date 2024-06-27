@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="ISO-8859-1">
+	<title th:text="#{MyTickets.Title}"></title>
+	<link rel="stylesheet" th:href="@{/css/mijnTicketten.css}">
+
+</head>
+
+<body>
+	<div class="navbar" th:insert="~{navbar}"></div>
+	<h1 th:text="#{MyTickets.Title}"></h1>
+	<h3 th:text="${aantalTicketsInTotaal}"></h3>
+	<table>
+		<thead>
+			<tr>
+				<th>Sport</th>
+				<th th:text="#{MyTickets.Date}"></th>
+				<th>Stadium</th>
+				<th th:text="#{MyTickets.Price}"></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="ticket : ${tickettten}">
+				<td th:text="${ticket.wedstrijd.sport.naam}"></td>
+				<td th:text="${ticket.wedstrijd.datum}"></td>
+				<td th:text="${ticket.wedstrijd.stadium.naam}"></td>
+				<td th:text="${#numbers.formatDecimal(ticket.wedstrijd.ticketPrijs, 1, 2)}"></td>
+			</tr>
+		</tbody>
+
+
+	</table>
+	</div>
+	<div th:if="${#lists.isEmpty(tickettten)}"></div>
+</body>
+
+</html>

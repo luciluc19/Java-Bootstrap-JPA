@@ -1,0 +1,45 @@
+.sport-container {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+
+.sport-item {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: flex-start;
+	width: 200px;
+
+	height: 300px;
+	margin: 10px;
+	border: 1px solid #ddd;
+	overflow: hidden;
+	
+	overflow-y: auto; 
+	background-color: #8080c0;
+}
+
+.sport-item img {
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+	max-height: 250px;
+
+}
+
+
+
+.sport-item a {
+	color: #ff8000;
+	text-decoration: none;
+	text-transform: uppercase;
+	
+	font-weight: bold;
+	
+}
+
+h1 {
+	text-align: center;
+}

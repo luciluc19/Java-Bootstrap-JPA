@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<link rel="stylesheet" th:href="@{/css/wedstrijd.css}">
+
+<head>
+<title th:text="#{Wedstrijd.pageName}">Wedstrijden</title>
+
+</head>
+
+<body>
+	<div class="navbar" th:insert="~{navbar}"></div>
+
+<div th:if="${successMessage}" class="alert alert-lightblue" role="alert">
+	<p th:text="${successMessage}"></p>
+</div>
+
+	<h1>
+		<span th:text="#{Wedstrijd.Title}"></span> <span th:text="${sportName}"></span>
+	</h1>
+
+
+
+	<div th:if="${not #lists.isEmpty(wedstrijden)}">
+		<table>
+			<thead>
+				<tr>
+					<th th:text="#{Wedstrijd.Date}"></th>
+					<th th:text="#{Wedstrijd.Time}"></th>
+					<th>Stadium</th>
+					<th>Disciplines</th>
+					<th th:text="#{Wedstrijd.Plaatsen}"></th>
+					<th th:text="#{Wedstrijd.Price}"></th>
+					<th th:text="#{Wedstrijd.BoughtTicket}"></th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="wedstrijd : ${wedstrijden}">
+					<td th:text="${wedstrijd.datum}"></td>
+					<td th:text="${wedstrijd.aanvangUur}"></td>
+					<td th:text="${wedstrijd.stadium.naam}"></td>
+					<td>
+						<ul>
+							<li th:each="discipline : ${wedstrijd.disciplines}"
+								th:text="${discipline.naam}"></li>
+						</ul>
+					</td>
+					<td th:text="${wedstrijd.capaciteit - wedstrijd.bezettePlaatsen}"></td>
+
+					<td><span
+						th:if="${wedstrijd.capaciteit - wedstrijd.bezettePlaatsen eq 0 and not isAdministrator}">Niet
+							beschikbaar</span> <span
+						th:if="${isAdministrator or (not isAdministrator and wedstrijd.capaciteit - wedstrijd.bezettePlaatsen gt 0)}"
+						th:text="${#numbers.formatDecimal(wedstrijd.ticketPrijs, 1, 2)}"></span>
+						<span
+						th:unless="${wedstrijd.capaciteit - wedstrijd.bezettePlaatsen eq 0 and not isAdministrator or isAdministrator or (not isAdministrator and wedstrijd.capaciteit - wedstrijd.bezettePlaatsen gt 0)}">
+					</span></td>
+					<td>
+						<span th:if="${@userService.getAantalTicketsPerIdWedstrijdEnUsername(wedstrijd.idWedstrijd, userName) == 0}"
+							  th:text="#{Wedstrijd.VanToepassing}"></span>
+						<span th:if="${@userService.getAantalTicketsPerIdWedstrijdEnUsername(wedstrijd.idWedstrijd, userName) != 0}"
+							  th:text="${@userService.getAantalTicketsPerIdWedstrijdEnUsername(wedstrijd.idWedstrijd, userName)}"></span>
+					</td>
+					<td><a
+						th:if="${(wedstrijd.capaciteit - wedstrijd.bezettePlaatsen > 0) and not isAdministrator}"
+						th:href="@{/nieuweTicket(idWedstrijd=${wedstrijd.idWedstrijd})}"
+						class="btn btn-primary" th:text="#{Wedstrijd.BuyTicket}"></a> <span
+						th:unless="${(wedstrijd.capaciteit - wedstrijd.bezettePlaatsen > 0) or isAdministrator}">
+					</span></td>
+
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div th:if="${#lists.isEmpty(wedstrijden)}">
+		<p>
+			No wedstrijden found for <span th:text="${sportName}"></span>.
+		</p>
+	</div>
+	<div th:if="${isAdministrator}">
+		<a th:href="@{/nieuweWedstrijd(sport=${sportName})}" th:text="#{Wedstrijd.NewWedstrijd}"></a>
+
+
+
+	</div>
+
+</body>
+
+</html>

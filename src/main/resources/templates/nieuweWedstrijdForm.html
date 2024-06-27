@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Nieuwe wedstrijd</title>
+</head>
+
+<body>
+	<div class="navbar" th:insert="~{navbar}"></div>
+	<h1>Nieuwe wedstrijd voor sport: <span th:text="${sportNaam}"></span> </h1>
+
+	<form th:action="@{/nieuweWedstrijd}" th:object="${nieuweWedstrijd}" method="post">
+		<p>
+			<label  for="datum" th:text="#{MyTickets.Date}"></label><br>
+			<input type="date" id="datum" th:field="*{datum}"><br>
+			<span th:if="${#fields.hasErrors('datum')}" th:errorclass="error" th:errors="*{datum}"></span>
+		</p>
+
+		<p>
+			<label for="aanvangsuur" th:text="#{NewTicket.AanvangUur}"></label><br>
+			<input type="time" id="aanvangsuur" th:field="*{aanvangsuur}"><br>
+			<span th:if="${#fields.hasErrors('aanvangsuur')}" th:errorclass="error" th:errors="*{aanvangsuur}"></span>
+		</p>
+
+
+		<label for="stadium">Stadium:</label><br>
+		<select id="stadium" name="stadium" th:field="*{idStadium}">
+			<option th:each="stadium : ${stadiums}" th:value="${stadium.idStadium}" th:text="${stadium.naam}"></option>
+		</select><br>
+
+
+		<p>
+			<label for="Disclipline1">Discipline 1:</label><br>
+			<input type="text" id="Disclipline1" th:field="*{Discipline1}"><br>
+			<span th:if="${#fields.hasErrors('discipline1')}" th:errorclass="error" th:errors="*{discipline1}"></span>
+		</p>
+		<p>
+			<label for="Disclipline2">Discipline 2:</label><br>
+			<input type="text" id="Disclipline2" th:field="*{Discipline2}"><br>
+			<span th:if="${#fields.hasErrors('discipline2')}" th:errorclass="error" th:errors="*{discipline2}"></span>
+
+		</p>
+
+		<p>
+			<label for="olympisch-nummer1" th:text="#{NewTicket.OlympNumber1}"></label><br>
+			<input type="text" th:field="*{olympischNummer1}"><br>
+			<span th:if="${#fields.hasErrors('olympischNummer1')}" th:errorclass="error"
+				th:errors="*{olympischNummer1}"></span>
+		</p>
+
+		<p>
+			<label for="olympisch-nummer2" th:text="#{NewTicket.OlympNumber2}"></label><br>
+			<input type="text" th:field="*{olympischNummer2}"><br>
+			<span th:if="${#fields.hasErrors('olympischNummer2')}" th:errorclass="error"
+				th:errors="*{olympischNummer2}"></span>
+		</p>
+		<p>
+			<label for="ticketPrijs" th:text="#{Wedstrijd.Price}">Ticket Price:</label><br>
+			<input type="text" id="ticketPrijs" th:field="*{ticketPrijs}"><br>
+			<span th:if="${#fields.hasErrors('ticketPrijs')}" th:errorclass="error" th:errors="*{ticketPrijs}"></span>
+		</p>
+		<p>
+			<label for="aantalPlaatsen" th:text="#{NewTicket.NumberOfSeats}">:</label><br>
+			<input type="text" id="aantalPlaatsen" th:field="*{aantalPlaatsen}"><br>
+			<span th:if="${#fields.hasErrors('aantalPlaatsen')}" th:errorclass="error"
+				th:errors="*{aantalPlaatsen}"></span>
+		<p>
+			<input type="hidden" name="sport" th:value="${sportNaam}" />
+
+
+			<input type="submit" th:value="#{NewTicket.Make}">
+	</form>
+</body>
+
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Ticketten kopen</title>
+	<link rel="stylesheet" th:href="@{/css/TickettenKopen.css}">
+	
+</head>
+
+<body>
+	<div class="navbar" th:insert="~{navbar}"></div>
+
+	<h1 th:text="#{NewTicket.Title}"></h1>
+
+	<form th:action="@{/nieuweTicket}" method="post">
+		<input type="hidden" name="idWedstrijd" th:value="${idWedstrijd}">
+
+
+		<p class="inline-block" th:text=#{NewTicket.PurchasedTickets}></p>
+		<p class="inline-block" th:text="${gekochteTicketten}"></p>
+
+			<br>
+
+		<p class="inline-block" th:text=#{NewTicket.AvailableTickets}></p>
+		<p class="inline-block" th:text="${maxPlaatsen}"></p>
+
+			<br>
+
+		<label for="aantalTickets" th:text=#{NewTicket.BuyTicket}>Voer aantal ticketten in:</label>
+		<input type="number" id="aantalTickets" name="aantalTickets" min="1" th:attr="max=${maxPlaatsen}" required>
+
+			<br>
+
+		<input type="submit" th:value="#{NewTicket.Buy}"></form>
+    
+</body>
+</html>

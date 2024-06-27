@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" th:href="@{/css/sporten.css}">
+
+<head>
+<title th:text="#{Sporten.Title}"></title>
+</head>
+
+<body>
+    <div class="navbar" th:insert="~{navbar}"></div>
+    <h1 th:text="#{Sporten.Title}"></h1>
+	<div class="sport-container">
+		<div th:each="sport : ${sports}" class="sport-item">
+			<img th:src="${sport.png}" alt="Sport Image" /> <a
+				th:href="@{/wedstrijd(sport=${sport.naam})}" th:text="${sport.naam}"></a>
+		</div>
+	</div>
+
+
+
+	<div th:if="${#authorization.expression('hasRole(''USER'')') and hasTickets}">
+		<form th:action="@{/sport/mijnTicketten}" method="get">
+			<button type="submit" th:text="#{Sporten.MyTickets}"></button>
+		</form>
+	</div>
+
+</body>
+
+</html>
